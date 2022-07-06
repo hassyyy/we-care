@@ -4,7 +4,7 @@ class BalanceMetric < Avo::Dashboards::MetricCard
   self.prefix = '₹'
 
   query do
-    contributions = Contribution.sum(:value)
+    contributions = Contribution.where(status: 'sent').sum(:value)
     donations = Donation.sum(:value)
     total = (contributions - donations)
 

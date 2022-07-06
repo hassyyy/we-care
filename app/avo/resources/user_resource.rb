@@ -14,7 +14,7 @@ class UserResource < Avo::BaseResource
   field :password_confirmation, as: :password
 
   field :contributions, as: :text, only_on: :show do |model, resource, view|
-    total = model.contributions.sum(:value)
+    total = model.contributions.where(status: 'sent').sum(:value)
     number_to_currency(total, AppOptions::CURRENCY_FORMAT)
   end
 

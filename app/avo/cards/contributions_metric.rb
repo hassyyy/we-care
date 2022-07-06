@@ -4,7 +4,7 @@ class ContributionsMetric < Avo::Dashboards::MetricCard
   self.prefix = '₹'
 
   query do
-    contributions = Contribution.sum(:value)
+    contributions = Contribution.where(status: 'sent').sum(:value)
 
     result number_to_currency(contributions, AppOptions::CURRENCY_FORMAT.merge(format: "%n"))
   end
