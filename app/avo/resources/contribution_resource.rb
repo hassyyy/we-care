@@ -18,5 +18,5 @@ class ContributionResource < Avo::BaseResource
 
   field :status, as: :badge, options: { info: ['submitted'], success: 'sent' }
   field :status, as: :hidden, visible: -> (resource:) { !context[:user].account_admin? }, only_on: :forms, default: 'submitted'
-  field :status, as: :select, visible: -> (resource:) { context[:user].account_admin? }, only_on: :forms, required: true, options: { 'Submitted': :submitted, 'Sent': :sent }, default: 'submitted'
+  field :status, as: :select, visible: -> (resource:) { context[:user].account_admin? }, only_on: :forms, options: { 'Sent': :sent }, default: 'sent'
 end
