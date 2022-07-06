@@ -1,7 +1,7 @@
 class DonationPolicy < ApplicationPolicy
 
-  def destroy?
-    user.account_admin? && record.resource.internal?
+  def edit?
+    false
   end
 
   class Scope < Scope
