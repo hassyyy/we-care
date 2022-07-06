@@ -6,6 +6,6 @@ class DonationsMetric < Avo::Dashboards::MetricCard
   query do
     donations = Donation.sum(:value)
 
-    result number_to_currency(donations, unit: "₹", delimiter: ",", precision: 0, format: "%n")
+    result number_to_currency(donations, AppOptions::CURRENCY_FORMAT.merge(format: "%n"))
   end
 end

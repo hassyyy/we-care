@@ -8,6 +8,6 @@ class BalanceMetric < Avo::Dashboards::MetricCard
     donations = Donation.sum(:value)
     total = (contributions - donations)
 
-    result number_to_currency(total, unit: "₹", delimiter: ",", precision: 0, format: "%n")
+    result number_to_currency(total, AppOptions::CURRENCY_FORMAT.merge(format: "%n"))
   end
 end

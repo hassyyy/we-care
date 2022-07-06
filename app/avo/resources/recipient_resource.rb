@@ -14,7 +14,7 @@ class RecipientResource < Avo::BaseResource
   field :internal, as: :boolean, hide_on: [:index, :edit]
   field :total_donations, as: :text, only_on: :show do |model, resource, view|
     total = model.donations.sum(:value)
-    number_to_currency(total, unit: "₹", delimiter: ",", precision: 0)
+    number_to_currency(total, AppOptions::CURRENCY_FORMAT)
   end
 
   field :donations, as: :has_many

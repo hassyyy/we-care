@@ -15,7 +15,7 @@ class UserResource < Avo::BaseResource
 
   field :contributions, as: :text, only_on: :show do |model, resource, view|
     total = model.contributions.sum(:value)
-    number_to_currency(total, unit: "₹", delimiter: ",", precision: 0)
+    number_to_currency(total, AppOptions::CURRENCY_FORMAT)
   end
 
 
