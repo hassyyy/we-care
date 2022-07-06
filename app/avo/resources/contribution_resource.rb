@@ -8,7 +8,8 @@ class ContributionResource < Avo::BaseResource
   field :user_id, as: :hidden, only_on: :forms, name: 'Contributor', default: -> { context[:user].id }
   field :user, as: :belongs_to, hide_on: :forms
 
-  field :value, as: :number, required: true, default: -> { context[:user].contributions.first&.value }, format_using: -> (value) { "₹#{value}" }, name: 'Amount'
+  field :value, as: :number, required: true, default: -> { context[:user].contributions.first&.value }, only_on: :forms, name: 'Amount'
+  field :value, as: :number, format_using: -> (value) { "₹#{value}" }, only_on: :index, name: 'Amount'
 
   field :month, as: :hidden, only_on: :forms, default: -> { Date.today.strftime("%b") }
   field :year, as: :hidden, only_on: :forms, default: -> { Date.today.year }
