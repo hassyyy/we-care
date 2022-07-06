@@ -30,7 +30,7 @@ class Contribution < ApplicationRecord
 
     user = self.user
     message = $twilio_client.messages.create(
-      body: "Hi #{user.name},\nThanks for your valuable contribution of Rs.#{self.value} for the month of #{self.month} #{self.year}\n\nWeCare",
+      body: "Hi #{user.name},\n\nThanks for your valuable contribution of Rs.#{self.value} for the month of #{self.month} #{self.year}\n\nWeCare",
       messaging_service_sid: $twilio_messaging_service_id,
       to: "+91#{user.phone}"
     )
