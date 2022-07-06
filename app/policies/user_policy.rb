@@ -1,5 +1,9 @@
 class UserPolicy < ApplicationPolicy
 
+  def update?
+    create?
+  end
+
   def attach_contributions?
     false
   end
