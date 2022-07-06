@@ -1,3 +1,4 @@
+include ActionView::Helpers::NumberHelper
 class RecipientResource < Avo::BaseResource
   self.title = :name
   self.includes = []
@@ -11,6 +12,10 @@ class RecipientResource < Avo::BaseResource
   field :contact_details, as: :number, required: true, name: 'Phone'
   field :other_details, as: :trix, required: true, always_show: true
   field :internal, as: :boolean, hide_on: [:index, :edit]
+  field :total_donations, as: :text, only_on: :show do |model, resource, view|
+    total = model.donations.sum(:value)
+    number_to_currency(total, unit: "₹", delimiter: ",", precision: 0)
+  end
 
   field :donations, as: :has_many
 end
