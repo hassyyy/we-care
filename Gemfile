@@ -48,6 +48,7 @@ gem "bootsnap", require: false
 gem 'avo'
 
 gem 'bcrypt-ruby'
+gem 'twilio-ruby'
 
 group :staging, :production do
   gem "pg"

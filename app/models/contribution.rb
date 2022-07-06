@@ -23,4 +23,17 @@ class Contribution < ApplicationRecord
 
   validates_uniqueness_of :user_id, scope: [:month, :year], message: 'already made a contribution for the selected month & year'
 
+  after_commit :send_sms, on: [:create, :update]
+
+  def send_sms
+    return if self.status != 'sent'
+
+    user = self.user
+    message = $twilio_client.messages.create(
+      body: "Hi #{user.name},\nThanks for your valuable contribution of Rs.#{self.value} for the month of #{self.month} #{self.year}\n\nWeCare",
+      messaging_service_sid: $twilio_messaging_service_id,
+      to: "+91#{user.phone}"
+    )
+    Rails.logger.info message.inspect
+  end
 end
