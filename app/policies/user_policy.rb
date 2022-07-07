@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
 
   def update?
-    create?
+    create? or record.eql?(::Avo::App.current_user)
   end
 
   def attach_contributions?
