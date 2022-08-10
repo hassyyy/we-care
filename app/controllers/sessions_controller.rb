@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
         redirect_back_or user
       else
         flash[:error] = 'Invalid password'
-        render 'new'
+        render 'new', status: :unauthorized
       end
     else
       flash[:error] = 'Invalid email or phone number'
-      render 'new'
+      render 'new', status: :unauthorized
     end
   end
 
