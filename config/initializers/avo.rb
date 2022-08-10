@@ -22,7 +22,7 @@ Avo.configure do |config|
   end
   config.current_user_resource_name = :user
   config.profile_menu = -> {
-    link "Profile", path: "/avo/resources/users/#{current_user.id}", icon: "user-circle"
+    link "Profile", path: "/avo/resources/users/#{current_user&.id}", icon: "user-circle"
   }
 
 
