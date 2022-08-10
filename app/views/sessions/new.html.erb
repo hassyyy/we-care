@@ -5,9 +5,9 @@
 <%= content_tag :h1, "Welcome to WeCare" %>
 
 <% if flash[:notice] %>
-  <%= content_tag :h4, flash[:notice] %>
+  <%= content_tag :h4, flash[:notice], class: 'notice' %>
 <% elsif flash[:error] %>
-  <%= content_tag :h4, flash[:error] %>
+  <%= content_tag :h4, flash[:error], class: 'error' %>
 <% end %>
 
 <%= form_for(:session, url: '/sessions') do |f| %>
@@ -21,6 +21,12 @@
 <style>
   img, h1, h4, label, input, form {
     text-align: center;
+  }
+  h4.notice {
+    color: yellow;
+  }
+  h4.error {
+    color: red;
   }
   img {
     display: block;
