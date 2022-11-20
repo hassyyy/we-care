@@ -1,7 +1,9 @@
-class BalanceMetric < Avo::Dashboards::MetricCard
-  self.id = 'balance_metric'
-  self.label = 'Balance'
+class AccountBalanceMetric < Avo::Dashboards::MetricCard
+  self.id = 'account_balance_metric'
+  self.label = 'Account Balance'
   self.prefix = '₹'
+  self.cols = 2
+
 
   query do
     contributions = Contribution.where(status: 'sent').sum(:value)
