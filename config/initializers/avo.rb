@@ -58,9 +58,22 @@ Avo.configure do |config|
   # config.display_license_request_timeout_error = true
   config.buttons_on_form_footers = true
 
-
   # Where should the user be redirected when he hits the `/avo` url
   config.home_path = '/avo/dashboards/home_dashboard'
+
+  # https://tailwindcss.com/docs/customizing-colors - Green
+  config.branding = {
+    colors: {
+      background: "240 253 244",
+      100 => "#dcfce7",
+      400 => "#4ade80",
+      500 => "#22c55e",
+      600 => "#16a34a",
+    },
+    logo: "/assets/we-care.png",
+    logomark: "/assets/we-care.png",
+    favicon: "/assets/we-care.ico"
+  }
 
   ## == Breadcrumbs ==
   # config.display_breadcrumbs = true
