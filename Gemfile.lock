@@ -71,12 +71,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    avo (2.19.0)
+    avo (2.20.0)
       actionview (>= 6.0)
       active_link_to
       activerecord (>= 6.0)
       addressable
-      breadcrumbs_on_rails
       docile
       dry-initializer
       httparty
@@ -92,8 +91,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.14.0)
       msgpack (~> 1.2)
-    breadcrumbs_on_rails (4.1.0)
-      railties (>= 5.0)
     builder (3.2.4)
     capybara (3.38.0)
       addressable
