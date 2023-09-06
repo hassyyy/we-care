@@ -5,7 +5,8 @@ class ContributionResource < Avo::BaseResource
   self.after_create_path = :index
   self.after_update_path = :index
 
-  field :user_id, as: :hidden, only_on: :forms, name: 'Contributor', default: -> { context[:user].id }
+  field :user_id, as: :hidden, only_on: :forms, name: 'Contributor', default: -> { context[:user].id }, visible: -> (resource:) { !context[:user].account_admin? }
+  field :user, as: :belongs_to, only_on: :forms, default: -> { context[:user].id }, visible: -> (resource:) { context[:user].account_admin? }
   field :user, as: :belongs_to, hide_on: :forms
 
   field :value, as: :number, required: true, default: -> { context[:user].contributions.first&.value }, only_on: :forms, name: 'Amount'
