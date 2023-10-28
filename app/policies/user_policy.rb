@@ -17,7 +17,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def view_contributions?
-    false
+    true
   end
 
   def edit_contributions?
