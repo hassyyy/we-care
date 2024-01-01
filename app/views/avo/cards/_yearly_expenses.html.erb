@@ -8,7 +8,7 @@
   </tr>
   <% (AppOptions::MIN_YEAR...Date.today.year).each do |year| %>
     <% contributions = Contribution.where(year: year).sum(:value) %>
-    <% donations = Donation.where(year: year).sum(:value) %>
+    <% donations = Donation.where("EXTRACT(YEAR FROM date) = ?", year).sum(:value) %>
 
     <tr class='data'>
       <th> <%= year %> </th>
