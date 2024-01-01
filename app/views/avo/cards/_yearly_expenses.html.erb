@@ -6,7 +6,7 @@
     <th> Contributions </th>
     <th> Donations </th>
   </tr>
-  <% (AppOptions::MIN_YEAR...Date.today.year).each do |year| %>
+  <% (Date.today.year.downto(AppOptions::MIN_YEAR)).each do |year| %>
     <% contributions = Contribution.where(year: year).sum(:value) %>
     <% donations = Donation.where("EXTRACT(YEAR FROM date) = ?", year).sum(:value) %>
 
