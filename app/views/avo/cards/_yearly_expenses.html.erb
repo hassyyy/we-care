@@ -1,0 +1,29 @@
+<% last_12_months = 12.times.map { |i| (Date.today - i.month).beginning_of_month } %>
+
+<table>
+  <tr>
+    <th> Year </th>
+    <th> Contributions </th>
+    <th> Donations </th>
+  </tr>
+  <% (AppOptions::MIN_YEAR...Date.today.year).each do |year| %>
+    <% contributions = Contribution.where(year: year).sum(:value) %>
+    <% donations = Donation.where(year: year).sum(:value) %>
+
+    <tr class='data'>
+      <th> <%= year %> </th>
+      <th> <%= contributions.zero? ? '-' : "₹#{contributions}" %> </th>
+      <th> <%= donations.zero? ? '-' : "₹#{donations}" %> </th>
+    </tr>
+  <% end %>
+</table>
+
+<style>
+  th {
+    border: 1px;
+    border-style: outset;
+  }
+  tr.data th {
+    font-weight: normal;
+  }
+</style>

@@ -25,7 +25,6 @@ Avo.configure do |config|
     link "Profile", path: "/avo/resources/users/#{current_user&.id}", icon: "user-circle"
   }
 
-
   ## == Authorization ==
   config.authorization_methods = {
     index: 'index?',
@@ -57,6 +56,19 @@ Avo.configure do |config|
   # config.view_component_path = "app/components"
   # config.display_license_request_timeout_error = true
   config.buttons_on_form_footers = true
+
+  config.main_menu = -> {
+    dashboard :home_dashboard
+    dashboard :yearly_expenses_dashboard
+    section "Transactions", icon: "heroicons/solid/currency-rupee" do
+      resource :contribution
+      resource :donation
+    end
+    section "Resources", icon: "heroicons/solid/users" do
+      resource :recipient
+      resource :user
+    end
+  }
 
   # Where should the user be redirected when he hits the `/avo` url
   config.home_path = '/avo/dashboards/home_dashboard'

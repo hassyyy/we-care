@@ -1,4 +1,5 @@
 include ActionView::Helpers::NumberHelper
+
 class RecipientResource < Avo::BaseResource
   self.title = :name
   self.includes = []
