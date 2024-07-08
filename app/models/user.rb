@@ -5,6 +5,8 @@ class User < ApplicationRecord
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
+  default_scope { order(name: :asc) }
+
   def self.current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
