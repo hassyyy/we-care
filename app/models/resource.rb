@@ -1,6 +1,8 @@
 class Resource < ApplicationRecord
   has_many :donations, dependent: :destroy
 
+  default_scope { order(name: :asc) }
+
   validates :name, presence: true
   validate :presence_of_address_or_contact
   validates :contact_details, length: { maximum: 15, message: "cannot exceed 15 digits" },
