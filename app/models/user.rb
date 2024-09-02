@@ -5,7 +5,13 @@ class User < ApplicationRecord
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
-  default_scope { order(name: :asc) }
+  # Sort by latest contribution
+  default_scope {
+  joins(:contributions)
+    .select('users.*, MAX(contributions.created_at) AS latest_contribution')
+    .group('users.id')
+    .order('latest_contribution DESC')
+  }
 
   def self.current_user
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])

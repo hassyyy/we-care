@@ -1,7 +1,13 @@
 class Resource < ApplicationRecord
   has_many :donations, dependent: :destroy
 
-  default_scope { order(name: :asc) }
+  # Sort by latest donation
+  default_scope {
+  joins(:donations)
+    .select('resources.*, MAX(.created_at) AS latest_donation')
+    .group('resources.id')
+    .order('latest_donation DESC')
+  }
 
   validates :name, presence: true
   validate :presence_of_address_or_contact
