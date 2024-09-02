@@ -3,10 +3,10 @@ class Resource < ApplicationRecord
 
   # Sort by latest donation
   default_scope {
-  joins(:donations)
-    .select('resources.*, MAX(.created_at) AS latest_donation')
-    .group('resources.id')
-    .order('latest_donation DESC')
+    joins(:donations)
+      .select('resources.*, COALESCE(MAX(donations.created_at), 0) AS donation')
+      .group('resources.id')
+      .order('latest_donation DESC')
   }
 
   validates :name, presence: true

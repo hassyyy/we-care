@@ -7,10 +7,10 @@ class User < ApplicationRecord
 
   # Sort by latest contribution
   default_scope {
-  joins(:contributions)
-    .select('users.*, MAX(contributions.created_at) AS latest_contribution')
-    .group('users.id')
-    .order('latest_contribution DESC')
+    joins(:contributions)
+      .select('users.*, COALESCE(MAX(contributions.created_at), 0) AS latest_contribution')
+      .group('users.id')
+      .order('latest_contribution DESC')
   }
 
   def self.current_user
