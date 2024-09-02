@@ -3,10 +3,9 @@ class Resource < ApplicationRecord
 
   # Sort by latest donation
   default_scope {
-    joins(:donations)
-      .select('resources.*, COALESCE(MAX(donations.created_at), \'2010-01-01 00:00:00\') AS latest_donation')
+    left_joins(:donations)
       .group('resources.id')
-      .order('latest_donation DESC')
+      .order(Arel.sql("COALESCE(MAX(donations.created_at), '2010-01-01 00:00:00') DESC"))
   }
 
   validates :name, presence: true
